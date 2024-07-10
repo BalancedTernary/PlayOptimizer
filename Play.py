@@ -3,7 +3,7 @@ import torch
 from torch.optim.optimizer import Optimizer
 
 class Play(Optimizer):
-    def __init__(self, params, lr=1e-4, smooth=10, point=0.5, soft_start=None, weight_decay=0, decay_flexibility=1, smoots_decrement=1e-2, snapshot_recovery_threshold=100, limit_snapshot_cycle=10, eps=1e-18):
+    def __init__(self, params, lr=1e-4, smooth=10, point=0.9, soft_start=None, weight_decay=0, decay_flexibility=1, smoots_decrement=1e-2, snapshot_recovery_threshold=100, limit_snapshot_cycle=10, eps=1e-18):
         #parameter checks
         if lr<0: #学习速率
             raise ValueError(f'Invalid 学习速率: {lr}')
@@ -114,6 +114,7 @@ class Play(Optimizer):
                     n[~torch.isfinite(n)]=0
                     n.clamp_(min=0,max=1)
                     n**=pp
+                    n.clamp_(max=n.mean())
                     d=-state['flat'].sign()*n*k
                     
                     #对使参数远离0的训练,进行抑制,实现权重衰减.
