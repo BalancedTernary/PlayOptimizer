@@ -58,7 +58,7 @@ class Play(Optimizer):
             loss = closure()
             loss.backward()
         if loss is None:
-            loss=1
+            loss=torch.tensor(1)
         
         pp=-math.log(2)/math.log(self.point)
         s=min((1+self.t)/(1+self.soft_start),1)
