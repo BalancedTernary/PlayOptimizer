@@ -10,7 +10,7 @@ layers=400
 features=512
 
 Play_lr=2e-4
-Adam_lr=2e-4
+Adam_lr=5e-5
 weight_decay=0
 
 
