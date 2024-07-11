@@ -9,7 +9,7 @@ class Play(Optimizer):
             raise ValueError(f'Invalid 学习速率: {lr}')
         if smooth is not None and smooth<0: #平滑程度
             raise ValueError(f'Invalid 平滑程度: {smooth}')
-        if point<=0 or point>=1: #梯度稳定度调定点，值越大越积极降低学习率以稳定梯度
+        if point<=0 or point>=1: #梯度稳定度调定点，值越大越积极降低学习率以稳定梯度.过大的值导致学习过早停止,过小的值导致参数无法收敛到固定值(只是会有极小波动,并非发散).建议取值在0.5~0.9之间
             raise ValueError(f'Invalid 梯度稳定度调定点: {point}')
         if soft_start is not None and (soft_start<=0): #软起动,这个参数将乘在lr上.初始值越小，启动越软
             raise ValueError(f'Invalid 软起动: {soft_start}')
