@@ -159,6 +159,7 @@ class Play(Optimizer):
                     
                     d-=d.mean()*ds
                     std0=p.data.std()
+                    std0[~torch.isfinite(std0)]=1
                     index=p.data.view(-1).sort()[1].sort()[1] #这里需要两次.sort()[1]才能得到还原顺序的索引
                     p.data+=d
                     
@@ -169,6 +170,7 @@ class Play(Optimizer):
                     
                     std_mean=torch.std_mean(p.data)
                     std=std_mean[0]
+                    std[~torch.isfinite(std)]=1
                     mean=std_mean[1]
                     p.data=(p.data-mean)*((std*(1-ds)+std0*ds)/(std+self.eps))+mean
                     
