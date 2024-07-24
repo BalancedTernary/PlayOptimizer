@@ -9,8 +9,8 @@ matrixSize=8
 layers=200
 features=512
 
-Play_lr=2e-4
-Adam_lr=2e-4
+Play_lr=1e-3
+Adam_lr=1e-3
 weight_decay=0
 
 
